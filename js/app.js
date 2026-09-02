@@ -1,4 +1,4 @@
-/* BIOS — сітка робіт, дві мови, лайтбокс. Без бібліотек. */
+/* BIOS — сітка робіт, дві мови, лайтбокс, плаваюча навігація. Без бібліотек. */
 (function () {
   'use strict';
 
@@ -9,68 +9,58 @@
     if (LANGS.indexOf(saved) > -1) lang = saved;
   } catch (e) { /* приватний режим — просто лишаємо українську */ }
 
+  var grid = document.getElementById('grid');
+  var floatbar = document.getElementById('floatbar');
+  var burger = document.getElementById('burger');
+
   /* ── тексти ─────────────────────────────────── */
   function applyTexts() {
     var dict = window.T[lang];
     document.documentElement.lang = lang;
+    if (dict.title) document.title = dict.title;
 
     document.querySelectorAll('[data-i18n]').forEach(function (el) {
       var v = dict[el.getAttribute('data-i18n')];
       if (v != null) el.innerHTML = v;
     });
 
-    if (dict.title) document.title = dict.title;
-
-    var btn = document.getElementById('lang');
-    btn.innerHTML = lang === 'uk'
+    document.getElementById('lang').innerHTML = lang === 'uk'
       ? '<b>UA</b><span>/</span>EN'
       : 'UA<span>/</span><b>EN</b>';
 
-    buildMarquee(dict.marquee);
     labelWorks();
   }
 
-  /* ── біжучий рядок ──────────────────────────── */
-  function buildMarquee(words) {
-    var row = document.getElementById('marquee');
-    if (!row) return;
-    // подвоюємо список — щоб стрічка йшла безшовно
-    row.innerHTML = words.concat(words).concat(words).concat(words)
-      .map(function (w) { return '<span>' + w + '</span>'; }).join('');
-  }
-
-  /* ── сітка робіт ────────────────────────────── */
-  var grid = document.getElementById('grid');
+  /* ── роботи ─────────────────────────────────── */
+  function title(w) { return w[lang] || w.uk; }
+  function tag(w) { return (lang === 'en' && w.tagEn) ? w.tagEn : w.tag; }
 
   function buildWorks() {
     grid.innerHTML = window.WORKS.map(function (w, i) {
-      var cls = 'work' + (w.size ? ' work--' + w.size : '');
-      return '<button type="button" class="' + cls + '" data-i="' + i + '">' +
-        '<img src="images/works/' + w.f + '" alt="" loading="lazy">' +
-        '<span class="work__meta"><b></b><i></i></span>' +
+      return '<button type="button" class="work' + (w.size ? ' work--' + w.size : '') + '" data-i="' + i + '">' +
+        '<span class="work__frame"><img src="images/works/' + w.f + '" alt="" loading="lazy"></span>' +
+        '<b></b><i></i>' +
         '</button>';
     }).join('');
     labelWorks();
     reveal();
   }
 
-  // підпис і теґ роботи потрібною мовою
-  function title(w) { return w[lang] || w.uk; }
-  function tag(w) { return (lang === 'en' && w.tagEn) ? w.tagEn : w.tag; }
-
   function labelWorks() {
     grid.querySelectorAll('.work').forEach(function (el) {
       var w = window.WORKS[+el.dataset.i];
-      el.querySelector('.work__meta b').textContent = title(w);
-      el.querySelector('.work__meta i').textContent = tag(w);
+      el.querySelector('b').textContent = title(w);
+      el.querySelector('i').textContent = tag(w);
       el.querySelector('img').alt = title(w);
-      el.setAttribute('aria-label', title(w));
     });
   }
 
   /* ── поява при прокрутці ────────────────────── */
   function reveal() {
     var items = grid.querySelectorAll('.work');
+    items.forEach(function (el, i) {
+      el.style.transitionDelay = (i % 3) * 70 + 'ms';
+    });
     if (!('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('in'); });
       return;
@@ -82,11 +72,48 @@
         io.unobserve(en.target);
       });
     }, { rootMargin: '0px 0px -8% 0px' });
-    items.forEach(function (el, i) {
-      el.style.transitionDelay = (i % 4) * 60 + 'ms';
-      io.observe(el);
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  // якщо сторінку перегорнули стрибком (клік по пункту меню),
+  // спостерігач може не спрацювати — показуємо все, що вже вище низу екрана
+  function revealPassed() {
+    grid.querySelectorAll('.work:not(.in)').forEach(function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
     });
   }
+
+  /* ── плаваюча навігація: з'їжджає після першого екрана ── */
+  var hero = document.getElementById('top');
+  var ticking = false;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var past = window.scrollY > hero.offsetHeight - 80;
+      floatbar.classList.toggle('show', past);
+      revealPassed();
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ── бургер (вузькі екрани) ─────────────────── */
+  function setMenu(open) {
+    floatbar.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', function () {
+    setMenu(!floatbar.classList.contains('open'));
+  });
+
+  document.getElementById('menu').addEventListener('click', function (e) {
+    if (e.target.closest('a')) setMenu(false);
+  });
 
   /* ── лайтбокс ───────────────────────────────── */
   var lb = document.getElementById('lb');
@@ -100,7 +127,7 @@
     var w = window.WORKS[cur];
     lbImg.src = 'images/works/' + w.f;
     lbImg.alt = title(w);
-    lbCap.textContent = '[ ' + title(w) + ' · ' + tag(w) + ' ]';
+    lbCap.textContent = title(w) + ' · ' + tag(w);
   }
 
   function open(i) {
@@ -129,33 +156,14 @@
   lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
 
   document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (!lb.hidden) close();
+      else if (floatbar.classList.contains('open')) setMenu(false);
+      return;
+    }
     if (lb.hidden) return;
-    if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') show(cur - 1);
     if (e.key === 'ArrowRight') show(cur + 1);
-  });
-
-  /* ── бургер-меню (вузькі екрани) ────────────── */
-  var nav = document.querySelector('.nav');
-  var burger = document.getElementById('burger');
-
-  function setMenu(open) {
-    nav.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
-  }
-
-  burger.addEventListener('click', function () {
-    setMenu(!nav.classList.contains('open'));
-  });
-
-  // клік по пункту — меню закривається й сторінка їде до секції
-  document.getElementById('menu').addEventListener('click', function (e) {
-    if (e.target.closest('a')) setMenu(false);
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && nav.classList.contains('open')) setMenu(false);
   });
 
   /* ── перемикач мови ─────────────────────────── */
