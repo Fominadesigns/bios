@@ -117,7 +117,8 @@ p{margin:0}
   display:block;font-weight:400;letter-spacing:-.06em;line-height:1;
   font-size:clamp(34px,4.4vw,62px);
 }
-.stats em{font-style:normal;font-size:.36em;margin-left:.2em;color:var(--dim)}
+.stats em[data-i18n]{font-style:normal;font-size:.36em;margin-left:.2em;color:var(--dim)}
+.stats b [data-mark]{font-size:inherit;color:inherit}
 .stats span{display:block;margin-top:10px;font-size:14px;color:var(--dim);max-width:20ch}
 
 /* ── секції ──────────────────────────────────── */
@@ -239,4 +240,109 @@ p{margin:0}
   *{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
   .work{opacity:1;transform:none}
+}
+
+/* ═══════════════════════════════════════════════
+   Намальовані від руки позначки
+   У тексті пишемо <em data-mark="u">слово</em>:
+   u — підкреслення, o — обведення, s — закреслення, a — стрілка.
+   Саму лінію малює js/app.js, тут лише розміщення.
+   ═══════════════════════════════════════════════ */
+[data-mark]{position:relative;display:inline-block;font-style:normal;font-weight:inherit}
+.mk{position:absolute;overflow:visible;pointer-events:none}
+.mk path{
+  fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round;
+  stroke-width:var(--mkw,2);vector-effect:non-scaling-stroke;
+  stroke-dasharray:var(--len,1200);stroke-dashoffset:var(--len,1200);
+  transition:stroke-dashoffset .9s cubic-bezier(.35,0,.15,1);
+}
+.mk path:nth-child(2){transition-delay:.18s;opacity:.55}
+.drawn .mk path{stroke-dashoffset:0}
+
+.mk--u{left:-2%;width:104%;bottom:-.16em;height:.30em;--mkw:2.5}
+.mk--o{left:-7%;width:114%;top:-16%;height:132%;--mkw:2}
+.mk--s{left:0;width:100%;top:50%;height:.28em;transform:translateY(-50%);--mkw:2}
+
+.hero__title .mk--u{--mkw:5;bottom:-.05em;height:.16em}
+.statement .mk--o{--mkw:2.5}
+.stats .mk--o{--mkw:2.5;left:-9%;width:118%}
+
+/* стрілка — окремий елемент, не навколо слова */
+.arrow{display:inline-block;width:74px;height:34px;position:relative;flex:0 0 auto;--mkw:2}
+.arrow .mk{inset:0;width:100%;height:100%}
+.arrow--dr{transform:rotate(8deg)}
+.arrow--dl{transform:scaleX(-1) rotate(8deg)}
+
+/* ── нотатки на полях ────────────────────────── */
+.note{
+  font-size:13px;line-height:1.35;color:var(--dim);
+  letter-spacing:-.02em;max-width:24ch;margin:0;
+}
+.note--tilt{transform:rotate(-1.6deg)}
+.sec__aside{
+  grid-column:2;justify-self:end;text-align:right;
+  margin-top:14px;max-width:26ch;
+}
+
+/* ── стопка: наступне фото наїжджає на попереднє ── */
+.stack{position:relative;margin-bottom:clamp(40px,7vh,90px)}
+.stack__card{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center}
+.stack__inner{
+  position:relative;width:min(100%,1180px);height:78vh;overflow:hidden;
+  background:#E7E7E4;transform-origin:50% 16%;will-change:transform;
+  border:0;padding:0;cursor:pointer;display:block;
+}
+.stack__inner img{width:100%;height:100%;object-fit:cover}
+.stack__inner::after{
+  content:"";position:absolute;inset:0;background:var(--bg);
+  opacity:var(--fade,0);pointer-events:none;
+}
+.stack__no{
+  position:absolute;top:18px;left:22px;color:#fff;
+  font-size:13px;letter-spacing:-.02em;text-shadow:0 1px 6px rgba(0,0,0,.45);
+}
+.stack__meta{
+  position:absolute;left:0;right:0;bottom:0;padding:22px 26px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+  background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff;text-align:left;
+}
+.stack__meta b{
+  font-weight:400;font-size:clamp(19px,2.4vw,38px);
+  letter-spacing:-.055em;line-height:1;
+}
+.stack__meta i{font-style:normal;font-size:14px;color:rgba(255,255,255,.75);white-space:nowrap}
+
+/* ── решта архіву під стопкою ────────────────── */
+.rest{border-top:1px solid var(--line);padding-top:clamp(22px,3vh,38px)}
+.rest__label{margin-bottom:clamp(20px,3vh,34px)}
+
+/* ── кнопка зі стрілкою ──────────────────────── */
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:clamp(30px,5vh,56px)}
+.pill--big{font-size:clamp(16px,1.9vw,21px);padding:16px 30px}
+
+/* ── дрібні правки композиції ────────────────── */
+.band__media{position:relative}
+.band__media .note{
+  position:absolute;right:-8px;bottom:-46px;
+  display:flex;align-items:flex-end;gap:6px;text-align:right;max-width:19ch;
+}
+.split--stagger > div:nth-child(2){padding-top:clamp(24px,6vh,80px)}
+.cols > div:nth-child(2){padding-top:clamp(16px,3vh,44px)}
+.cols > div:nth-child(3){padding-top:clamp(8px,1.5vh,22px)}
+
+@media (max-width:1000px){
+  .sec__aside{grid-column:1/-1;justify-self:start;text-align:left;max-width:34ch}
+  .stack__inner{height:60vh}
+  .band__media .note{position:static;margin-top:14px;justify-content:flex-start;text-align:left}
+  .split--stagger > div:nth-child(2){padding-top:0}
+  .cols > div{padding-top:0!important}
+}
+@media (max-width:560px){
+  .arrow{width:56px;height:26px}
+  .stack__card{height:88vh}
+  .stack__inner{height:66vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .mk path{stroke-dashoffset:0!important}
+  .note--tilt{transform:none}
 }

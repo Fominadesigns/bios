@@ -9,7 +9,7 @@ window.T = {
     top_left:'Одеса, Україна<br>Пише під тегом BIOS',
     top_right:'Усе почалося зі стін<br>і не закінчилося ними',
 
-    hero_l1:'Просто старий',
+    hero_l1:'Просто <em data-mark="u">старий</em>',
     hero_l2:'райтер з Одеси',
 
     nav_works:'Роботи', nav_video:'Відео', nav_about:'Про',
@@ -17,6 +17,7 @@ window.T = {
 
     band_left:'Стіни, потяги, покинуті цехи. Двадцять із гаком років однієї лінії.',
     band_right:'І окремо — зйомка того, як фарба лягає. Мільйони переглядів на одному русі руки.',
+    band_note:'Той самий персонаж-балончик',
 
     stat_m:'млн', stat_k:'тис.', stat_subs_n:'45,6',
     stat_views:'переглядів у одного відео',
@@ -27,14 +28,18 @@ window.T = {
     works_title:'Роботи',
     works_note:'Вибране з архіву: закінчені шматки й кадри процесу.',
     works_more:'Гаразд, покажи більше',
+    works_aside:'Гортай — кожен наступний кадр наїжджає на попередній',
+    works_rest:'Решта архіву',
 
     video_title:'Відео',
-    video_lead:'Він знімає графіті від першої особи — руку, балончик і мить, коли фарба торкається поверхні. Ці відео збирають десятки мільйонів переглядів.',
+    video_aside:'Знімає сам, від першої особи',
+    video_lead:'Він знімає графіті від першої особи — руку, балончик і мить, коли фарба торкається поверхні. Ці відео збирають <em data-mark="u">десятки мільйонів</em> переглядів.',
     video_body:'Зйомка процесу — окрема послуга: для брендів, фестивалів і власних проєктів. Матеріал підходить і для реклами, і для соцмереж.',
     cap_views:'переглядів',
 
     about_title:'Про',
-    about_big:'Борис Біосов. Одеса. Понад двадцять років під тегом BIOS — один із найвідоміших псевдонімів української графіті-сцени.',
+    about_aside:'Про нього писав блог Montana Cans',
+    about_big:'Борис Біосов. Одеса. Понад <em data-mark="o">двадцять років</em> під тегом BIOS — один із найвідоміших псевдонімів української графіті-сцени.',
     about_crews_l:'Крюї',
     about_where_l:'Де бачили',
     about_where:'Блог Montana&nbsp;Cans<br>Виїзди в Польщу<br>Лекція «Графіті від першого лиця»<br>в артцентрі «Я&nbsp;Галерея»',
@@ -42,10 +47,12 @@ window.T = {
     about_now:'Малює<br>Знімає<br>Тримає графіті-шоп в Одесі<br>Видає журнал про графіті',
 
     legacy_title:'Не тільки стіни',
+    legacy_aside:'Журнал і шоп — теж його руками',
     legacy_text:'Перший український журнал про графіті. 88 сторінок, наклад 600 примірників, сцена 2020 — початку 2021. Разом із Євгеном Шиловим і Олександром Магулою.',
     shop_text:'Графіті-шоп у центрі Одеси, працює з 2017 року. Фарба, маркери, кепи, одяг. Соборна площа, 6.',
 
     order_title:'Замовити',
+    order_aside:'Заявки йдуть в Instagram-директ',
     srv1_t:'Мурали<br>й фасади',
     srv1_a:'Стіни будівель', srv1_b:'Брандмауери', srv1_c:'Паркани й ворота',
     srv2_t:'Оформлення<br>приміщень',
@@ -66,7 +73,7 @@ window.T = {
     top_left:'Odesa, Ukraine<br>Writing under the tag BIOS',
     top_right:'It all started with walls<br>and did not end there',
 
-    hero_l1:'Just an old',
+    hero_l1:'Just an <em data-mark="u">old</em>',
     hero_l2:'writer from Odesa',
 
     nav_works:'Work', nav_video:'Video', nav_about:'About',
@@ -74,6 +81,7 @@ window.T = {
 
     band_left:'Walls, trains, abandoned factories. Twenty-odd years of one line.',
     band_right:'And, separately, the film of paint going down. Millions of views on a single move of the hand.',
+    band_note:'That same spray-can character',
 
     stat_m:'m', stat_k:'k', stat_subs_n:'45.6',
     stat_views:'views on a single video',
@@ -84,14 +92,18 @@ window.T = {
     works_title:'Work',
     works_note:'Selected from the archive: finished pieces and frames from the process.',
     works_more:'Okay, show me more',
+    works_aside:'Scroll — each frame slides over the one before',
+    works_rest:'The rest of the archive',
 
     video_title:'Video',
-    video_lead:'He films graffiti in first person — the hand, the can and the moment paint meets the surface. These clips pull tens of millions of views.',
+    video_aside:'He shoots it himself, first person',
+    video_lead:'He films graffiti in first person — the hand, the can and the moment paint meets the surface. These clips pull <em data-mark="u">tens of millions</em> of views.',
     video_body:'Filming the process is a service of its own: for brands, festivals and his own projects. The footage works for ads and for social.',
     cap_views:'views',
 
     about_title:'About',
-    about_big:'Borys Biosov. Odesa. Over twenty years under the tag BIOS — one of the best-known names on the Ukrainian graffiti scene.',
+    about_aside:'Featured on the Montana Cans blog',
+    about_big:'Borys Biosov. Odesa. Over <em data-mark="o">twenty years</em> under the tag BIOS — one of the best-known names on the Ukrainian graffiti scene.',
     about_crews_l:'Crews',
     about_where_l:'Seen at',
     about_where:'The Montana&nbsp;Cans blog<br>Painting trips to Poland<br>The lecture «Graffiti first hand»<br>at Ya&nbsp;Gallery art centre',
@@ -99,10 +111,12 @@ window.T = {
     about_now:'Painting<br>Filming<br>Running a graffiti shop in Odesa<br>Publishing a graffiti magazine',
 
     legacy_title:'Not only walls',
+    legacy_aside:'The magazine and the shop are his too',
     legacy_text:'The first Ukrainian magazine about graffiti. 88 pages, 600 copies, covering the scene from 2020 to early 2021. Made with Yevhen Shylov and Oleksandr Mahula.',
     shop_text:'A graffiti shop in central Odesa, open since 2017. Paint, markers, caps, clothing. 6 Soborna Square.',
 
     order_title:'Commission',
+    order_aside:'Enquiries go to his Instagram DMs',
     srv1_t:'Murals<br>and facades',
     srv1_a:'Building walls', srv1_b:'Firewalls', srv1_c:'Fences and gates',
     srv2_t:'Interior<br>work',

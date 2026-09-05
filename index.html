@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-<link href="css/style.css?v=2" rel="stylesheet">
+<link href="css/style.css?v=3" rel="stylesheet">
 </head>
 <body>
 
@@ -44,7 +44,7 @@
 <!-- ── 00 · перший екран ───────────────────────── -->
 <section class="hero" id="top">
   <h1 class="hero__title">
-    <span data-i18n="hero_l1">Просто старий</span>
+    <span data-i18n="hero_l1">Просто <em data-mark="u">старий</em></span>
     <span data-i18n="hero_l2">райтер з Одеси</span>
   </h1>
 
@@ -58,17 +58,21 @@
   </nav>
 
   <div class="band">
-    <p data-i18n="band_left">Стіни, потяги, покинуті цехи. Двадцять із гаком років однієї лінії.</p>
+    <p class="band__side" data-i18n="band_left">Стіни, потяги, покинуті цехи. Двадцять із гаком років однієї лінії.</p>
     <figure class="band__media">
       <img src="images/works/01-bios-character.jpg" alt="Напис BIOS і персонаж-балончик на стіні" width="720" height="900">
+      <figcaption class="note note--tilt">
+        <span data-i18n="band_note">Той самий персонаж-балончик</span>
+        <span class="arrow arrow--dl" data-mark="a"></span>
+      </figcaption>
     </figure>
-    <p data-i18n="band_right">І окремо — зйомка того, як фарба лягає. Мільйони переглядів на одному русі руки.</p>
+    <p class="band__side" data-i18n="band_right">І окремо — зйомка того, як фарба лягає. Мільйони переглядів на одному русі руки.</p>
   </div>
 </section>
 
 <!-- ── цифри ───────────────────────────────────── -->
 <section class="stats">
-  <div><b>28<em data-i18n="stat_m">млн</em></b><span data-i18n="stat_views">переглядів у одного відео</span></div>
+  <div><b><em data-mark="o">28<em data-i18n="stat_m">млн</em></em></b><span data-i18n="stat_views">переглядів у одного відео</span></div>
   <div><b><span data-i18n="stat_subs_n">45,6</span><em data-i18n="stat_k">тис.</em></b><span data-i18n="stat_subs">підписників в Instagram</span></div>
   <div><b>1841</b><span data-i18n="stat_posts">публікація в архіві</span></div>
   <div><b>2017</b><span data-i18n="stat_shop">рік, коли відкрив «Вуличний»</span></div>
@@ -80,9 +84,20 @@
     <p class="sec__num">01</p>
     <h2 data-i18n="works_title">Роботи</h2>
     <p class="sec__note" data-i18n="works_note">Вибране з архіву: закінчені шматки й кадри процесу.</p>
+    <p class="sec__aside note note--tilt" data-i18n="works_aside">Гортай — кожен наступний кадр наїжджає на попередній</p>
   </div>
-  <div class="works" id="grid"></div>
-  <div class="center"><a class="pill" href="https://www.instagram.com/bios.lines/" target="_blank" rel="noopener" data-i18n="works_more">Гаразд, покажи більше</a></div>
+
+  <div class="stack" id="stack"></div>
+
+  <div class="rest">
+    <p class="note rest__label" data-i18n="works_rest">Решта архіву</p>
+    <div class="works" id="grid"></div>
+  </div>
+
+  <div class="center cta">
+    <span class="arrow arrow--dr" data-mark="a"></span>
+    <a class="pill" href="https://www.instagram.com/bios.lines/" target="_blank" rel="noopener" data-i18n="works_more">Гаразд, покажи більше</a>
+  </div>
 </section>
 
 <!-- ── 02 · відео ──────────────────────────────── -->
@@ -90,10 +105,11 @@
   <div class="sec__head">
     <p class="sec__num">02</p>
     <h2 data-i18n="video_title">Відео</h2>
+    <p class="sec__aside note note--tilt" data-i18n="video_aside">Знімає сам, від першої особи</p>
   </div>
   <div class="split">
     <div>
-      <p class="lead" data-i18n="video_lead">Він знімає графіті від першої особи — руку, балончик і мить, коли фарба торкається поверхні. Ці відео збирають десятки мільйонів переглядів.</p>
+      <p class="lead" data-i18n="video_lead">Він знімає графіті від першої особи — руку, балончик і мить, коли фарба торкається поверхні. Ці відео збирають <em data-mark="u">десятки мільйонів</em> переглядів.</p>
       <p class="dim" data-i18n="video_body">Зйомка процесу — окрема послуга: для брендів, фестивалів і власних проєктів. Матеріал підходить і для реклами, і для соцмереж.</p>
       <div class="links">
         <a href="https://www.youtube.com/@bioslines" target="_blank" rel="noopener">YouTube →</a>
@@ -112,8 +128,9 @@
   <div class="sec__head">
     <p class="sec__num">03</p>
     <h2 data-i18n="about_title">Про</h2>
+    <p class="sec__aside note note--tilt" data-i18n="about_aside">Одна з найвпізнаваніших рук в українському графіті</p>
   </div>
-  <p class="statement" data-i18n="about_big">Борис Біосов. Одеса. Понад двадцять років під тегом BIOS — один із найвідоміших псевдонімів української графіті-сцени.</p>
+  <p class="statement" data-i18n="about_big">Борис Біосов. Одеса. Понад <em data-mark="o">двадцять років</em> під тегом BIOS — один із найвідоміших псевдонімів української графіті-сцени.</p>
   <div class="cols">
     <div>
       <b data-i18n="about_crews_l">Крюї</b>
@@ -135,8 +152,9 @@
   <div class="sec__head">
     <p class="sec__num">04</p>
     <h2 data-i18n="legacy_title">Не тільки стіни</h2>
+    <p class="sec__aside note note--tilt" data-i18n="legacy_aside">Журнал і шоп — теж його руками</p>
   </div>
-  <div class="split">
+  <div class="split split--stagger">
     <div>
       <h3>Legacy</h3>
       <p class="dim" data-i18n="legacy_text">Перший український журнал про графіті. 88 сторінок, наклад 600 примірників, сцена 2020 — початку 2021. Разом із Євгеном Шиловим і Олександром Магулою.</p>
@@ -154,6 +172,7 @@
   <div class="sec__head">
     <p class="sec__num">05</p>
     <h2 data-i18n="order_title">Замовити</h2>
+    <p class="sec__aside note note--tilt" data-i18n="order_aside">Пише сам, без менеджерів</p>
   </div>
   <div class="services">
     <div class="services__cell">
@@ -190,7 +209,10 @@
     </div>
   </div>
   <!-- TODO: логотипи клієнтів — лише після підтвердження Борисом. Див. content/facts.md -->
-  <div class="center"><a class="pill" href="https://ig.me/m/bios.lines" target="_blank" rel="noopener" data-i18n="order_cta">Так, розкажу про проєкт</a></div>
+  <div class="center cta">
+    <span class="arrow arrow--dr" data-mark="a"></span>
+    <a class="pill pill--big" href="https://ig.me/m/bios.lines" target="_blank" rel="noopener" data-i18n="order_cta">Так, розкажу про проєкт</a>
+  </div>
 </section>
 
 <!-- ── 06 · контакти ───────────────────────────── -->
@@ -216,7 +238,7 @@
   <figure class="lb__box"><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
 </div>
 
-<script src="js/i18n.js?v=2"></script>
-<script src="js/app.js?v=2"></script>
+<script src="js/i18n.js?v=3"></script>
+<script src="js/app.js?v=3"></script>
 </body>
 </html>
