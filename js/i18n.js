@@ -30,6 +30,8 @@ window.T = {
     works_more:'Гаразд, покажи більше',
     works_aside:'Гортай — кожен наступний кадр наїжджає на попередній',
     works_rest:'Решта архіву',
+    works_manifest:'У нього немає <i>улюбленої стіни</i>. Є <i>улюблена лінія</i>. Вагон, фасад, покинутий цех — задача та сама: щоб її помітили.',
+    works_judge:'Дивись сам.',
 
     video_title:'Відео',
     video_aside:'Знімає сам, від першої особи',
@@ -94,6 +96,8 @@ window.T = {
     works_more:'Okay, show me more',
     works_aside:'Scroll — each frame slides over the one before',
     works_rest:'The rest of the archive',
+    works_manifest:'He has no <i>favourite wall</i>. He has a <i>favourite line</i>. A carriage, a facade, an abandoned factory — the job is the same: make it impossible to miss.',
+    works_judge:'Judge for yourself.',
 
     video_title:'Video',
     video_aside:'He shoots it himself, first person',

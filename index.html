@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
-<link href="css/style.css?v=3" rel="stylesheet">
+<link href="css/style.css?v=4" rel="stylesheet">
 </head>
 <body>
 
@@ -87,7 +87,21 @@
     <p class="sec__aside note note--tilt" data-i18n="works_aside">Гортай — кожен наступний кадр наїжджає на попередній</p>
   </div>
 
-  <div class="stack" id="stack"></div>
+  <div class="wsplit">
+    <div class="wsplit__text">
+      <p class="manifest" data-i18n="works_manifest">У нього немає <i>улюбленої стіни</i>. Є <i>улюблена лінія</i>. Вагон, фасад, покинутий цех — задача та сама: щоб її помітили.</p>
+      <p class="judge">
+        <span data-i18n="works_judge">Дивись сам.</span>
+        <span class="arrow arrow--long" data-mark="al"></span>
+      </p>
+      <div class="nowplay" id="nowplay">
+        <span class="nowplay__no"></span>
+        <b></b>
+        <i></i>
+      </div>
+    </div>
+    <div class="stack" id="stack"></div>
+  </div>
 
   <div class="rest">
     <p class="note rest__label" data-i18n="works_rest">Решта архіву</p>
@@ -238,7 +252,7 @@
   <figure class="lb__box"><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
 </div>
 
-<script src="js/i18n.js?v=3"></script>
-<script src="js/app.js?v=3"></script>
+<script src="js/i18n.js?v=4"></script>
+<script src="js/app.js?v=4"></script>
 </body>
 </html>

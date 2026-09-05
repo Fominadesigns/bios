@@ -34,6 +34,11 @@
     a: { vb: '0 0 90 40', ratio: true, d: [
       'M4,9 C22,1.5 52,3.5 74,20',
       'M61,10.5 L77,20.5 L58.5,30'
+    ]},
+    // довга майже пряма стрілка — як у лівій колонці референсу
+    al: { vb: '0 0 200 40', ratio: false, d: [
+      'M3,20.5 C52,18.4 118,21.6 190,19.6',
+      'M172,10 L192,19.8 L171,30'
     ]}
   };
 
@@ -101,6 +106,8 @@
       : 'UA<span>/</span><b>EN</b>';
 
     labelWorks();
+    if (shown < 0) shown = 0;
+    paintNowplay();
     drawMarks();          // після зміни мови позначки треба намалювати заново
   }
 
@@ -180,17 +187,36 @@
      тому природну позицію рахуємо самі — картки однакової висоти. */
   var cards = [];
 
+  var nowplay = document.getElementById('nowplay');
+  var shown = -1;
+
   function moveStack() {
     if (!cards.length) return;
     var top = stack.getBoundingClientRect().top + window.scrollY;
     var H = cards[0].offsetHeight;
+
     for (var i = 0; i < cards.length - 1; i++) {
       var passed = window.scrollY - (top + i * H);
       var p = Math.min(Math.max(passed / H, 0), 1);
       var inner = cards[i].firstElementChild;
-      inner.style.transform = 'scale(' + (1 - 0.085 * p) + ')';
-      inner.style.setProperty('--fade', (p * 0.45).toFixed(3));
+      inner.style.transform = 'scale(' + (1 - 0.055 * p) + ')';
+      inner.style.setProperty('--fade', (p * 0.3).toFixed(3));
     }
+
+    // підпис у лівій колонці показує ту роботу, що зараз зверху
+    // перемикаємо підпис на середині переходу, коли нова картка вже переважає
+    var active = Math.floor((window.scrollY - top) / H + 0.5);
+    active = Math.min(Math.max(active, 0), cards.length - 1);
+    if (active !== shown) { shown = active; paintNowplay(); }
+  }
+
+  function paintNowplay() {
+    if (!nowplay || shown < 0) return;
+    var w = window.WORKS[shown];
+    if (!w) return;
+    nowplay.querySelector('.nowplay__no').textContent = pad(shown + 1) + ' / ' + pad(cards.length);
+    nowplay.querySelector('b').textContent = title(w);
+    nowplay.querySelector('i').textContent = tag(w);
   }
 
   /* ═══ плаваюча навігація ═════════════════════════ */
